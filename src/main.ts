@@ -1,3 +1,7 @@
-// FreeCell - Entry point
-// Game engine and renderer will be initialized here in Phase 3
-export { GameEngine } from './engine/GameEngine';
+import './ui/styles/main.css';
+import { App } from './app/App';
+
+const root = document.getElementById('game-root');
+if (!root) throw new Error('Missing #game-root element');
+
+new App(root);

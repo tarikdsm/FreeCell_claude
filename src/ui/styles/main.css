@@ -1,0 +1,257 @@
+/* === Reset & Base === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0d4a22;
+  color: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+#game-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* === Menu Bar === */
+.menu-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 8px;
+  background: linear-gradient(180deg, #1a3a2a 0%, #0f2e1a 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.menu-group {
+  display: flex;
+  gap: 4px;
+}
+
+.menu-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #e0d6a0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.menu-btn {
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  color: #ddd;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.menu-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.menu-btn:active:not(:disabled) {
+  background: rgba(255,255,255,0.25);
+}
+
+.menu-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* === Canvas Container === */
+#canvas-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* === Status Bar === */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #0f2e1a 0%, #0a2214 100%);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+  color: #aaa;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.status-deal, .status-moves, .status-timer {
+  flex: 1;
+}
+
+.status-moves {
+  text-align: center;
+}
+
+.status-timer {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Modal Overlay === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-dialog {
+  background: linear-gradient(145deg, #1e4d30, #143822);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 24px 32px;
+  min-width: 280px;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.modal-dialog h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #e0d6a0;
+  text-align: center;
+}
+
+.modal-dialog label {
+  display: block;
+  font-size: 14px;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 16px;
+  outline: none;
+}
+
+.modal-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76,175,80,0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.modal-btn-primary {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.modal-btn-primary:hover {
+  background: #45a049;
+}
+
+.modal-btn-cancel {
+  background: rgba(255,255,255,0.12);
+  color: #ccc;
+}
+
+.modal-btn-cancel:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* === Win Screen === */
+.win-title {
+  font-size: 28px !important;
+  color: #FFD700 !important;
+  text-shadow: 0 2px 8px rgba(255,215,0,0.4);
+}
+
+.win-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+/* === Shake Animation === */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* === Mobile Adjustments === */
+@media (max-width: 767px) {
+  .menu-bar {
+    padding: 0 4px;
+  }
+
+  .menu-btn {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .menu-title {
+    font-size: 15px;
+  }
+
+  .status-bar {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
