@@ -78,6 +78,7 @@ html, body {
 /* === Canvas Container === */
 #canvas-container {
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   position: relative;
 }
@@ -94,12 +95,14 @@ html, body {
   align-items: center;
   justify-content: space-between;
   height: 36px;
+  min-height: 36px;
   padding: 0 12px;
-  background: linear-gradient(180deg, #0f2e1a 0%, #0a2214 100%);
-  border-top: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(180deg, #1a3a2a 0%, #0f2e1a 100%);
+  border-top: 1px solid rgba(255,255,255,0.15);
   font-size: 13px;
-  color: #aaa;
+  color: #ccc;
   flex-shrink: 0;
+  position: relative;
   z-index: 10;
 }
 

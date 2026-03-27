@@ -22,6 +22,11 @@ export class StatusBar {
     this.timerSpan.className = 'status-timer';
 
     this.element.append(this.dealSpan, this.movesSpan, this.timerSpan);
+
+    // Set initial content so the bar is visible before the first update
+    this.dealSpan.textContent = 'Game #—';
+    this.movesSpan.textContent = 'Moves: 0';
+    this.timerSpan.textContent = '0:00';
   }
 
   update(dealNumber: number, moveCount: number, seconds: number): void {

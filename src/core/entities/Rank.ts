@@ -66,7 +66,7 @@ export function rankName(rank: Rank): string {
 }
 
 /**
- * Returns the single-character symbol for a rank.
+ * Returns the single-character symbol for a rank (used for serialization).
  */
 export function rankSymbol(rank: Rank): string {
   switch (rank) {
@@ -77,6 +77,15 @@ export function rankSymbol(rank: Rank): string {
     case Rank.King: return 'K';
     default: return String(rank);
   }
+}
+
+/**
+ * Returns the display string for a rank (used for card rendering).
+ * Same as rankSymbol except Ten returns '10' instead of 'T'.
+ */
+export function rankDisplay(rank: Rank): string {
+  if (rank === Rank.Ten) return '10';
+  return rankSymbol(rank);
 }
 
 /**

@@ -1,6 +1,6 @@
 import type { Card } from '../core/entities/Card';
 import { ALL_SUITS, isRedSuit, Suit } from '../core/entities/Suit';
-import { ALL_RANKS, Rank, rankSymbol } from '../core/entities/Rank';
+import { ALL_RANKS, Rank, rankSymbol, rankDisplay } from '../core/entities/Rank';
 import { cardOf } from '../core/entities/Card';
 
 
@@ -106,7 +106,8 @@ export class CardRenderer {
     const r = this._cornerRadius;
     const color = isRedSuit(card.suit) ? CARD_RED : CARD_BLACK;
     const suitSym = SUIT_SYMBOLS[card.suit] ?? '';
-    const rankSym = rankSymbol(card.rank);
+    const rankDisp = rankDisplay(card.rank);
+    const isTen = card.rank === Rank.Ten;
 
     // Card background
     ctx.fillStyle = CARD_BG;
@@ -121,28 +122,30 @@ export class CardRenderer {
 
     ctx.fillStyle = color;
     const fontSize = Math.floor(w * 0.22);
+    const tenFontSize = Math.floor(w * 0.18);
     const smallFont = Math.floor(w * 0.16);
     const margin = Math.floor(w * 0.08);
 
     // Top-left index
-    ctx.font = `bold ${fontSize}px Georgia, "Times New Roman", serif`;
+    const rankFont = isTen ? tenFontSize : fontSize;
+    ctx.font = `bold ${rankFont}px Georgia, "Times New Roman", serif`;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText(rankSym, margin, margin);
+    ctx.fillText(rankDisp, margin, margin);
 
     ctx.font = `${smallFont}px Georgia, "Times New Roman", serif`;
-    ctx.fillText(suitSym, margin, margin + fontSize);
+    ctx.fillText(suitSym, margin, margin + rankFont);
 
     // Bottom-right index (rotated 180°)
     ctx.save();
     ctx.translate(w, h);
     ctx.rotate(Math.PI);
-    ctx.font = `bold ${fontSize}px Georgia, "Times New Roman", serif`;
+    ctx.font = `bold ${rankFont}px Georgia, "Times New Roman", serif`;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText(rankSym, margin, margin);
+    ctx.fillText(rankDisp, margin, margin);
     ctx.font = `${smallFont}px Georgia, "Times New Roman", serif`;
-    ctx.fillText(suitSym, margin, margin + fontSize);
+    ctx.fillText(suitSym, margin, margin + rankFont);
     ctx.restore();
 
     // Center pips or face letter
