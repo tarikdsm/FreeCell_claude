@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+coverage/
+.env
+.DS_Store
+Thumbs.db
+
+# Cloned reference repos (research only)
+freecell/
+FreecellJS/
+cards.js/
+free-cell/
